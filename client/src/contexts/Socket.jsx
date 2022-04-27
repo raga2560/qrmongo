@@ -4,7 +4,9 @@ import { v4 as id } from "uuid";
 
 export const SocketContext = createContext({});
 
-const initialState = io("http://10.1.2.16:4000", {
+const endpoint = "http://10.1.2.16:4000"
+
+const initialState = io(endpoint, {
     extraHeaders: {
         authorization: window.localStorage.getItem("token") || "",
     },
