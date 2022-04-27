@@ -30,7 +30,9 @@ cd client && npm i && npm run dev -- --port 3000 --host "0.0.0.0" --open
 Setup completed, now the client has 3 routes.
 
 `/` is protected. You need to login first.
+
 `/scan` is also protected. You must login to scan to authorized others to login too.
+
 `/login` you can put any emails with password `123`
 
 **NOTE**
@@ -45,4 +47,6 @@ Setup completed, now the client has 3 routes.
 3. Second device, go to `/login` the open the QR tab
 4. Second device, one authorization completed, the device with redirect it self to `/` showing JSON below.
 
-    `{ "user": "example@email.com" }`
+```
+{ "user": "example@email.com" }
+```
