@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LOGIN</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js"
+            integrity="sha512-is1ls2rgwpFZyixqKFEExPHVUUL+pPkBEPw47s/6NDQ4n1m6T/ySeDW3p54jp45z2EJ0RSOgilqee1WhtelXfA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"
+            integrity="sha512-BCMqEPl2dokU3T/EFba7jrfL4FxgY6ryUh4rRC9feZw4yWUslZ3Uf/lPZ5/5UlEjn4prlQTRfIPYQkDrLCZJXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+    </head>
+    <body>
+        <div
+            class="w-full h-screen bg-base-100 flex place-content-center place-items-center"
+        >
+            <div
+                class="card min-w-min h-96 bg-base-200 flex flex-row place-items-center"
+            >
+                <div class="w-full card-body">
+                    <form
+                        id="loginform"
+                        class="flex flex-col gap-6 place-items-center place-content-center"
+                    >
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Email</span>
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="Type here"
+                                class="input input-bordered w-full max-w-xs"
+                            />
+                        </div>
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Password</span>
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Type here"
+                                class="input input-bordered w-full max-w-xs"
+                            />
+                        </div>
+                        <div class="form-control w-full max-w-xs">
+                            <input
+                                type="submit"
+                                class="btn btn-primary w-full max-w-xs"
+                                value="SIGN IN"
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div class="w-10 divider divider-horizontal">OR</div>
+                <div
+                    class="w-full card-body flex place-content-center place-items-center"
+                >
+                    <div id="qrcode"></div>
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+            import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
+            const QrID = { id: uuidv4() };
+            const endpoint = "http://10.1.2.16:4000";
+            const socket = io(endpoint);
+
+            new QRCode(document.getElementById("qrcode"), JSON.stringify(QrID));
+
+            socket.on("connect", () => {
+                socket.emit("/auth/qr-request", QrID);
+            });
+
+            socket.on("/auth/approved", ({ token }) => {
+                if (token) {
+                    window.localStorage.setItem("token", token);
+                    window.location.replace("/");
+                }
+            });
+
+            function submitHandler(event) {
+                event.preventDefault();
+                const email = document.querySelector("#email").value;
+                const password = document.querySelector("#password").value;
+
+                socket.emit("/auth/from-login", { email, password });
+            }
+
+            const form = document.querySelector("#loginform");
+            form.addEventListener("submit", submitHandler);
+        </script>
+    </body>
+</html>

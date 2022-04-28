@@ -4,6 +4,21 @@ const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
+const path = require("path");
+
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
+app.get("/scan", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "scan.html"));
+});
 
 const io = new Server(server, {
     cors: {

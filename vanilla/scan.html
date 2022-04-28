@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Scan</title>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <script src="./jwt-decode.js"></script>
+    </head>
+    <body>
+        <div id="qr-reader" style="width: 500px"></div>
+        <div id="qr-reader-results"></div>
+        <script type="module">
+            const jwt_decode = window.jwt_decode;
+
+            const userinfo = document.querySelector("#user-info");
+            const token = window.localStorage.getItem("token") || null;
+            if (!token) {
+                window.location.replace("/login");
+            }
+
+            import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+            const endpoint = "http://10.1.2.16:4000";
+            const socket = io(endpoint, {
+                extraHeaders: {
+                    authorization: window.localStorage.getItem("token") || "",
+                },
+            });
+
+            socket.on("connect", () => {
+                console.log("Conntect");
+            });
+
+            var resultContainer = document.getElementById("qr-reader-results");
+            var lastResult,
+                countResults = 0;
+
+            function onScanSuccess(decodedText, decodedResult) {
+                if (decodedText !== lastResult) {
+                    ++countResults;
+                    lastResult = decodedText;
+                    try {
+                        let json = JSON.parse(decodedText);
+                        let id = json?.id;
+                        if (id) {
+                            socket.emit("/auth/qr-scan", { id });
+                        }
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
+            }
+
+            var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
+                fps: 10,
+                qrbox: 250,
+            });
+            html5QrcodeScanner.render(onScanSuccess);
+        </script>
+    </body>
+</html>

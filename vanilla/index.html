@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PROTECTED</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="./jwt-decode.js"></script>
+    </head>
+    <body>
+        <div
+            class="w-full h-screen bg-base-100 flex place-content-center place-items-center"
+        >
+            <div
+                class="card min-w-min h-96 bg-base-200 flex flex-row place-items-center"
+            >
+                <pre id="user-info" class="p-10"></pre>
+            </div>
+        </div>
+        <script type="module">
+            const jwt_decode = window.jwt_decode;
+
+            const userinfo = document.querySelector("#user-info");
+            const token = window.localStorage.getItem("token") || null;
+            if (!token) {
+                window.location.replace("/login");
+            }
+            let decoded = jwt_decode(token);
+            userinfo.innerHTML = JSON.stringify(decoded, null, 4);
+        </script>
+    </body>
+</html>

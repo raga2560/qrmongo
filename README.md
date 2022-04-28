@@ -16,7 +16,17 @@ cd server && npm i && npm run dev
 
 Now your server is running at http://0.0.0.0:4000. We need to used host "0.0.0.0" to expose the port publicly in the local network so that you can use other device to scan.
 
-**Run the client**
+** Run html5 client **
+
+Setup completed, now the client has 3 routes.
+
+`locahost:4000/` is protected. You need to login first.
+
+`locahost:4000/scan` is also protected. You must login to scan to authorized others to login too.
+
+`locahost:4000/login` you can put any emails with password `123`
+
+**Run the react client**
 
 ```shell
 # Get the machine ip
