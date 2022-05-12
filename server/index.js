@@ -6,7 +6,30 @@ const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://ramesh:IndiatoLove@cluster0.begbs.mongodb.net/studentdb?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+/*
+
+client.connect(err => {
+  const collection = client.db("studentdb").collection("userrecord");
+  // perform actions on the collection object
+        //
+        var dbo = client.db("mydb");
+  dbo.createCollection("customers", function(err, res) {
+    if (err) throw err;
+    console.log("Collection created!");
+//    client.close();
+  });
+*/
+
 app.use(express.static("public"));
+
+app.post("/logoutstatus", (req, res) => {
+	console.log("called");
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -19,6 +42,8 @@ app.get("/login", (req, res) => {
 app.get("/scan", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "scan.html"));
 });
+
+
 
 const io = new Server(server, {
     cors: {
@@ -38,21 +63,41 @@ io.on("connection", (socket) => {
     });
     socket.on("/auth/qr-request", (data) => {
         // join a room in order to be able to recieve message when auth approve
+	 console.log("qr-request "+ JSON.stringify(data));
         socket.join(data.id);
     });
+
     socket.on("/auth/qr-scan", (data) => {
         // the user that scan must the one who already login
         // he already has indentity from this auth token
         // so we can re-issue and new auth token for others
-        const authorization = socket.request.headers.authorization;
+ //       const authorization = socket.request.headers.authorization;
+                 io.to(data.id).emit("/auth/approved",  data);
+/*
+//        const decoded = jwt.verify(authorization, "supersecuresecret");
+        client.connect(err => {
+        var  collection = client.db("studentdb").collection("userrecord");
+	var query = {
+                   email: data.email
+		 }
+        dbo.findOne(query, function(err, res) {
 
-        const decoded = jwt.verify(authorization, "supersecuresecret");
+		if(res.status =='granted'){
+	         console.log("qr-scan "+ JSON.stringify(data));
+                 var token = jwt.sign({ user: data.id }, "supersecuresecret");
+                 io.to(data.id).emit("/auth/approved",  data);
+		}else {
+               
+                 io.to(data.id).emit("/auth/notapproved",  data);
+		}
+        });
 
-        const token = jwt.sign({ user: decoded.user }, "supersecuresecret");
-        io.to(data.id).emit("/auth/approved", { token });
     });
+		*/
+});
 });
 
 server.listen(4000, "0.0.0.0", () => {
     console.log("listening on *:4000");
 });
+

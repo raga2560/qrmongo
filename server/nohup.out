@@ -1,0 +1,119 @@
+listening on *:4000
+listening on *:4000
+listening on *:4000
+listening on *:4000
+
+/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:37
+      if (err) throw err;
+               ^
+JsonWebTokenError: jwt must be provided
+    at Object.module.exports [as verify] (/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:53:17)
+    at Socket.<anonymous> (/home/ubuntu/walletconnect/qr-login/server/index.js:49:29)
+    at Socket.emit (node:events:520:28)
+    at Socket.emitUntyped (/home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/socket.js:465:39
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+listening on *:4000
+
+/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:37
+      if (err) throw err;
+               ^
+JsonWebTokenError: jwt must be provided
+    at Object.module.exports [as verify] (/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:53:17)
+    at Socket.<anonymous> (/home/ubuntu/walletconnect/qr-login/server/index.js:49:29)
+    at Socket.emit (node:events:520:28)
+    at Socket.emitUntyped (/home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/socket.js:465:39
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+node:internal/modules/cjs/loader:936
+  throw err;
+  ^
+
+Error: Cannot find module '/home/ubuntu/walletconnect/qr-login/server/server.js'
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+listening on *:4000
+
+/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:37
+      if (err) throw err;
+               ^
+JsonWebTokenError: jwt must be provided
+    at Object.module.exports [as verify] (/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:53:17)
+    at Socket.<anonymous> (/home/ubuntu/walletconnect/qr-login/server/index.js:49:29)
+    at Socket.emit (node:events:520:28)
+    at Socket.emitUntyped (/home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/socket.js:465:39
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+listening on *:4000
+
+/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:37
+      if (err) throw err;
+               ^
+JsonWebTokenError: jwt must be provided
+    at Object.module.exports [as verify] (/home/ubuntu/walletconnect/qr-login/server/node_modules/jsonwebtoken/verify.js:53:17)
+    at Socket.<anonymous> (/home/ubuntu/walletconnect/qr-login/server/index.js:49:29)
+    at Socket.emit (node:events:520:28)
+    at Socket.emitUntyped (/home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /home/ubuntu/walletconnect/qr-login/server/node_modules/socket.io/dist/socket.js:465:39
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+listening on *:4000
+listening on *:4000
+in scan
+listening on *:4000
+in scanundefined
+in scanundefined
+listening on *:4000
+in scan{"data":{"id":"raga2560@gmail.com"}}
+listening on *:4000
+in scan{"data":{"id":"raga2560@gmail.com"}}
+listening on *:4000
+in scanraga2560@gmail.com
+listening on *:4000
+qr-request {"id":"raga2560@gmail.com"}
+listening on *:4000
+qr-scan {"data":{"id":"raga2560@gmail.com"}}
+in scanundefined
+qr-scan {"data":{"id":"raga2560@gmail.com"}}
+in scanundefined
+qr-request {"id":"raga2560@gmail.com"}
+qr-scan {"id":"raga2560@gmail.com"}
+in scanraga2560@gmail.com
+/home/ubuntu/walletconnect/qr-login/server/index.js:55
+        io.to(data.id).emit("/auth/approved", { data.id });
+                                                    ^
+
+SyntaxError: Unexpected token '.'
+    at Object.compileFunction (node:vm:352:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1032:15)
+    at Module._compile (node:internal/modules/cjs/loader:1067:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1155:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+qr-request {"id":"raga2560@gmail.com"}
+qr-scan {"id":"raga2560@gmail.com"}
+in scanraga2560@gmail.com
+qr-request {"id":"raga2560@gmail.com"}
+qr-scan {"id":"raga2560@gmail.com"}
+in scanraga2560@gmail.com
+listening on *:4000
+qr-request {"id":"raga2560@gmail.com"}
+qr-scan {"id":"raga2560@gmail.com"}
+in scanraga2560@gmail.com
+qr-request {"id":"raga2560@gmail.com"}
+qr-request {"id":"raga2560@gmail.com"}
+qr-request {"id":"raga2560@gmail.com"}
+qr-request {"id":"raga2560@gmail.com"}
+qr-request {"id":"raga2560@gmail.com"}
+qr-request {"id":"raga2560@gmail.com"}
+qr-scan {"id":"raga2560@gmail.com"}
+in scanraga2560@gmail.com
+listening on *:4000
+listening on *:4000
+listening on *:4000
