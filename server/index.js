@@ -5,12 +5,22 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+var bodyParser = require('body-parser');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://ramesh:IndiatoLove@cluster0.begbs.mongodb.net/studentdb?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+
+
+//app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+//app.use(bodyParser.json()); // Send JSON responses
+
+
 /*
+ *
+ *
+ *
 
 client.connect(err => {
   const collection = client.db("studentdb").collection("userrecord");
@@ -24,11 +34,18 @@ client.connect(err => {
   });
 */
 
+app.use(express.json({extended: false}));
+
 app.use(express.static("public"));
 
 app.post("/logoutstatus", (req, res) => {
-	console.log("called");
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+    console.log("called " + JSON.stringify(req.body));
+     res.status(200).json(0);;
+});
+
+app.post("/loginstatus", (req, res) => {
+    console.log("called " + JSON.stringify(req.body));
+     res.status(200).json(0);;
 });
 
 app.get("/", (req, res) => {
